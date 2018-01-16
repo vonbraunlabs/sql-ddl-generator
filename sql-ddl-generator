@@ -22,6 +22,8 @@ if (!defined('AUTOLOAD_COMPOSER_INSTALL')) {
     die(1);
 }
 
+require AUTOLOAD_COMPOSER_INSTALL;
+
 function help(string $msg)
 {
     fprintf(STDERR, "Error: %s" . PHP_EOL, $msg);

@@ -9,6 +9,13 @@
     "require": {
         "php": "^7.0"
     },
+    "config": {
+        "platform": {
+            "php": "7.1.0"
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
     "autoload": {
         "classmap": [
             "src/"
