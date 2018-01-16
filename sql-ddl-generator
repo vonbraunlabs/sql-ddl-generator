@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -5,7 +6,10 @@ require __DIR__ . '/vendor/autoload.php';
 function help(string $msg)
 {
     fprintf(STDERR, "Error: %s" . PHP_EOL, $msg);
-    fprintf(STDERR, "Usage: php sql-ddl-generator.php MODEL.json" . PHP_EOL);
+    fprintf(STDERR, "Usage: php sql-ddl-generator MODEL" . PHP_EOL . PHP_EOL);
+    fprintf(STDERR, "    MODEL - a .json file or directory with a collection " .
+        "of JSON files" . PHP_EOL);
+
     exit(1);
 }
 
