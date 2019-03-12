@@ -22,8 +22,9 @@ class Field
     {
         $str = "`" . $this->name . "` " . $this->type;
         if ($this->notNull) {
-            $str .= " NOT NULL";
+            $str .= " NOT";
         }
+        $str .= " NULL";
 
         if ($this->default) {
             $str .=" DEFAULT " . $this->default;
