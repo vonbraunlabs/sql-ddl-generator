@@ -6,10 +6,11 @@ define('COMMENT_SEPARATOR', '-- ------------------------------------------------
 
 class Database
 {
+    private static $nameList = [];
+
     public function __construct(array $databaseModel, $create_schema = true)
     {
         $this->name = $databaseModel['name'];
-        $this->create_schema = $create_schema;
         $this->tableList = [];
 
         if (array_key_exists('table', $databaseModel)) {
@@ -27,14 +28,14 @@ class Database
     {
         $str = '';
         
-        if ($this->create_schema) {
+        if (!in_array($this->name, self::$nameList)) {
             $str .= COMMENT_SEPARATOR;
             $str .= "-- Database {$this->name}" . PHP_EOL;
             $str .= COMMENT_SEPARATOR;
             $str .= PHP_EOL;
             $str .= "CREATE SCHEMA IF NOT EXISTS `{$this->name}` DEFAULT CHARACTER SET utf8 ;" . PHP_EOL;
-            $str .= "USE `{$this->name}`;" . PHP_EOL;
             $str .= PHP_EOL;
+            self::$nameList []= $this->name;
         }
 
         foreach ($this->tableList as $table) {
