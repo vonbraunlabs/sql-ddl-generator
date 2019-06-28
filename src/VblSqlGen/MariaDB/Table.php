@@ -93,13 +93,13 @@ class Table
         }
         $str .= PHP_EOL;
 
-        $str .= "CREATE TRIGGER `{$this->name}_before_insert` BEFORE INSERT " .
+        $str .= "CREATE TRIGGER `{$this->database}`.`{$this->name}_before_insert` BEFORE INSERT " .
             "ON `{$this->database}`.`{$this->name}`" . PHP_EOL;
         $str .= "FOR EACH ROW" . PHP_EOL;
         $str .= "    SET NEW.`create_by` = CURRENT_USER()," . PHP_EOL;
         $str .= "        NEW.`update_by` = CURRENT_USER();" . PHP_EOL;
         $str .= PHP_EOL;
-        $str .= "CREATE TRIGGER `{$this->name}_before_update` BEFORE UPDATE " .
+        $str .= "CREATE TRIGGER `{$this->database}`.`{$this->name}_before_update` BEFORE UPDATE " .
             "ON `{$this->database}`.`{$this->name}`" . PHP_EOL;
         $str .= "FOR EACH ROW" . PHP_EOL;
         $str .= "    SET NEW.`update_by` = CURRENT_USER()," . PHP_EOL;
@@ -286,7 +286,7 @@ class Table
         $upperOp = strtoupper($op);
         $auditName = "audit_{$this->name}";
         $str = "delimiter //" . PHP_EOL;
-        $str .= "CREATE TRIGGER `{$auditName}_{$op}_trigger`" . PHP_EOL;
+        $str .= "CREATE TRIGGER `{$this->database}`.`{$auditName}_{$op}_trigger`" . PHP_EOL;
         $str .= "AFTER {$upperOp} ON {$this->getFullName()}" . PHP_EOL;
         $str .= "FOR EACH ROW" . PHP_EOL;
         $str .= "BEGIN" . PHP_EOL;
