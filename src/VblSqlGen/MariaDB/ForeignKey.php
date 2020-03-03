@@ -8,6 +8,8 @@ class ForeignKey extends Field
     {
         parent::__construct($fieldModel, $table);
         $this->references = $fieldModel['references'];
+        $this->database = isset($fieldModel['database']) ?
+            $fieldModel['database'] : null;
     }
 
     public function getReferences() : string
@@ -15,5 +17,11 @@ class ForeignKey extends Field
         return $this->references;
     }
 
+    public function getDatabase() : ?string
+    {
+        return $this->database;
+    }
+
     protected $references;
+    protected $database;
 }

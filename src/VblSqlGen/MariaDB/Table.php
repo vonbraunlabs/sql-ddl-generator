@@ -143,9 +143,11 @@ class Table
     protected function fkConstraintToString(ForeignKey $fk, bool $audit = false) : string
     {
         $name = Table::wrapName("fk_" . ($audit ? "audit_" : "") . "{$this->name}_{$fk->getName()}");
+        $refDatabase = null === $fk->getDatabase() ?
+            $this->database : $fk->getDatabase();
         return "    CONSTRAINT `$name`" . PHP_EOL .
             "        FOREIGN KEY(`{$fk->getName()}`)" . PHP_EOL .
-            "        REFERENCES `{$this->database}`.`{$fk->getReferences()}` (`id`)" . PHP_EOL .
+            "        REFERENCES `{$refDatabase}`.`{$fk->getReferences()}` (`id`)" . PHP_EOL .
             "        ON DELETE NO ACTION" . PHP_EOL .
             "        ON UPDATE NO ACTION";
     }
