@@ -9,6 +9,9 @@ class Table
         $this->database = $database;
         $this->name = $tableModel['name'];
         $this->audit = isset($tableModel['audit']) ? $tableModel['audit'] : false;
+        if (!isset($tableModel['field_list'])) {
+            $tableModel['field_list'] = [];
+        }
         $this->fieldList = $this->getFieldList($tableModel['field_list']);
         $this->comment = isset($tableModel['comment']) ? $tableModel['comment'] : null;
 
